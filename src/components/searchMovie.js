@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import MovieCard from "./movieCard"
+import MovieCard from "./movieCard.js";
 
 export default function SearchMovies(){
 
@@ -11,9 +11,7 @@ export default function SearchMovies(){
         e.preventDefault(); //Prevents refreshing of the webpage
 
         //API url used to fetch the movies
-        const url = `https://api.themoviedb.org/3/search/movie?
-        api_key=0288b60ade5cdcd9c3c57b748fee643f&language=en-US&query=${query}&page=1&
-        include_adult=false`;
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=0288b60ade5cdcd9c3c57b748fee643f&language=en-US&query=${query}&page=1&include_adult=false`;
 
         try {
             const res = await fetch(url);
@@ -22,8 +20,6 @@ export default function SearchMovies(){
         } catch (err) {
             console.log(err);
         }
-
-        
     }
 
     return (
@@ -38,9 +34,9 @@ export default function SearchMovies(){
             </form>
             <div className="card-list">
                 {movies.filter(movie => movie.poster_path).map(movie => (
-                    <MovieCard movie={movie} key={movie.id}/>
+                   <MovieCard movie={movie} key={movie.id} />
                 ))}
-            </div>
+            </div>    
         </>
     )
 }
